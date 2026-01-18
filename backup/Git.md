@@ -147,4 +147,6 @@ git branch -d 分支名
 > github：公共的仓库，private付费
 gitlab：自己买服务器，自建仓库
 
-上传和拉取代码
+- Github创建仓库
+```New repository``` --> ```name``` --> ```Description简介``` --> ``` visibility选择public``` --> ```Add README 打开``` --> ```.gitignore忽略管理.git隐藏文件夹``` --> ```Create respository``` 
+创建成功之后，点击 ```code``` 显示的网址就是该远程仓库的网址。
