@@ -121,7 +121,17 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ul>
 <p>！使用前需包含头文件**&lt;inttypes.h&gt;**，格式宏本身是字符串，需要双引号包裹。</p>
 <div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">uint8_t</span> <span class="pl-s1">age</span> <span class="pl-c1">=</span> <span class="pl-c1">18</span>;
-<span class="pl-en">printf</span>(<span class="pl-s">"年龄：%"</span><span class="pl-s1">PRIu8</span><span class="pl-s">""</span>, <span class="pl-s1">age</span>);</pre></div></div>
+<span class="pl-en">printf</span>(<span class="pl-s">"年龄：%"</span><span class="pl-s1">PRIu8</span><span class="pl-s">""</span>, <span class="pl-s1">age</span>);</pre></div>
+<h3>2.C语言从源码到可执行文件经历的四个阶段</h3>
+<p>四个阶段分别是：预处理、编译、汇编、链接</p>
+<h4>（1）预处理器预处理阶段 <code class="notranslate">hello.c</code> --&gt;<code class="notranslate">hello.i</code></h4>
+<p>该阶段的主要任务是处理带 <code class="notranslate">#</code> 的语句，包括加载头文件、宏替换、条件编译等。</p>
+<ul>
+<li>将所有 <code class="notranslate">include</code> 包含的内容原封不动地拷贝到当前文件中。</li>
+</ul>
+<h4>（2）编译器编译阶段</h4>
+<h4>（3）汇编器汇编阶段</h4>
+<h4>（4）链接器链接阶段</h4></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
