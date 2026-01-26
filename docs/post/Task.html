@@ -127,11 +127,42 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h4>（1）预处理器预处理阶段 <code class="notranslate">hello.c</code> --&gt;<code class="notranslate">hello.i</code></h4>
 <p>该阶段的主要任务是处理带 <code class="notranslate">#</code> 的语句，包括加载头文件、宏替换、条件编译等。</p>
 <ul>
-<li>将所有 <code class="notranslate">include</code> 包含的内容原封不动地拷贝到当前文件中。</li>
+<li>将所有 <code class="notranslate">include</code> 包含的内容原封不动地拷贝到当前文件中，但会导致重复包含的问题。</li>
 </ul>
-<h4>（2）编译器编译阶段</h4>
-<h4>（3）汇编器汇编阶段</h4>
-<h4>（4）链接器链接阶段</h4></div>
+<h5>头文件重复包含问题</h5>
+<p>假设你的代码结构如下：</p>
+<ul>
+<li>b.h：声明void func_b();</li>
+<li>a.h：#include "b.h"</li>
+<li>hello.c：#include "a.h" &amp;&amp; #include "b.h"<br>
+此时 <code class="notranslate">void func_b();</code> 会被导入两次，若是函数</li>
+</ul>
+<h4>（2）编译器编译阶段 <code class="notranslate">hello.i</code> --&gt;<code class="notranslate">hello.s</code></h4>
+<ul>
+<li>该阶段核心任务是把预处理后的 <code class="notranslate">hello.i</code> 文件，通过语法分析、语义分析、优化和代码生成，转换成汇编代码 <code class="notranslate">hello.s</code> 。</li>
+<li>汇编代码是比c语言更接近硬件的代码，但此文件仍可用文本编辑器打开查看。
+<ul>
+<li>语法分析：检查代码是否符合语法规则；</li>
+<li>语义分析：检查逻辑合理性，如变量未定义、函数参数类型不匹配；</li>
+<li>优化：删除空语句、简化表达式等，无副作用；</li>
+<li>代码生成：将C语言代码翻译成对应架构的汇编指令。</li>
+</ul>
+</li>
+</ul>
+<h4>（3）汇编器汇编阶段 <code class="notranslate">hello.s</code> --&gt;<code class="notranslate">hello.o</code></h4>
+<p>汇编器将汇编语言翻译成机器认识的机器代码，得到 <code class="notranslate">.o</code> 为后缀的二进制文件，该文件也称目标文件。</p>
+<h4>（4）链接器链接阶段 <code class="notranslate">多个目标文件</code> --&gt;<code class="notranslate">一个可执行文件</code></h4>
+<ul>
+<li>链接器的工作：将多个目标文件，包括<code class="notranslate">hello.o</code> 目标文件和<code class="notranslate">printf</code> 函数所在的目标文件拼在一起，解决函数/变量的地址引用问题，最终生成一个能直接运行的可执行文件。</li>
+</ul>
+<p>汇编得到的<code class="notranslate">hello.o</code> 是一个不完整的目标文件，里面用到了<code class="notranslate">printf</code> 函数，但<code class="notranslate">printf</code> 函数的实现不在<code class="notranslate">hello.o</code> 中，它只存了一个待填充的跳转地址。<br>
+链接器会根据代码里的外部引用，去标准库中找到<code class="notranslate">printf</code> 函数所在的目标文件（以及其他依赖的目标文件），将它们合并为一个整体：</p>
+<ul>
+<li>给每个目标文件里的函数、变量分配最终的内存地址；</li>
+<li>用对应的内存地址填充跳转地址；</li>
+<li>把所有目标文件的符号整理成一个全局符号表，确保没有冲突；</li>
+<li>生成最终的可执行文件，<code class="notranslate">windows</code> 对应<code class="notranslate">.exe</code> 后缀，<code class="notranslate">linux</code> 对应<code class="notranslate">.out</code> 后缀。</li>
+</ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
