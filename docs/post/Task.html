@@ -149,6 +149,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>生成最终的可执行文件，<code class="notranslate">windows</code> 对应<code class="notranslate">.exe</code> 后缀，<code class="notranslate">linux</code> 对应<code class="notranslate">.out</code> 后缀。</li>
 </ul>
 <h3>3.四个阶段的内存地址分配问题</h3>
+<blockquote>
+<p>先理解透彻佬的<a href="http://113.46.194.199/docs/04_C_stack_heap/index.html" rel="nofollow">超全C内存管理</a></p>
+</blockquote>
 <p>相对地址：相对于当前目标文件的偏移地址，汇编阶段生成；<br>
 绝对地址：程序运行时在内存中的真实地址，链接阶段生成；<br>
 存储段：目标文件、可执行文件的内存分区，包括.text代码段、.data数据段、.rodata只读数据段，堆区、栈区。</p>
